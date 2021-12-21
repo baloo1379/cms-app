@@ -10,6 +10,21 @@ export class MainPage {
   pageTitle = 'Strona Główna';
   pageBackgroundColor = '#eee';
   pageBackgroundImg = './assets/main-bg.jpg';
+  posImg = './assets/grid.jpg';
+  grid = [
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'},
+    {img: this.posImg, link: '#'}
+  ];
 
   constructor(private menuService: MenuService) {
     this.menuService.setPageTitle(this.pageTitle);

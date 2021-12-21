@@ -1,16 +1,16 @@
 <ion-app>
   <app-nav #nav [appPages]="appPages"></app-nav>
-  <ion-content class="custom-bg" [ngStyle]="{'background-color': pageBackgroundColor}">
-    <ion-header>
-      <ion-toolbar color="amber">
-        <ion-buttons slot="start">
-          <ion-button (click)="nav.openMenu()">
-            <ion-icon slot="icon-only" name="menu"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-title>{{ pageTitle }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-header>
+    <ion-toolbar color="amber">
+      <ion-buttons slot="start">
+        <ion-button (click)="nav.openMenu()">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{ pageTitle }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="custom-bg" fullscreen [ngStyle]="{'background-color': pageBackgroundColor}">
     <router-outlet id="main-menu"></router-outlet>
   </ion-content>
 </ion-app>
