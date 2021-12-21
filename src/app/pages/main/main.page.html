@@ -1,0 +1,12 @@
+  <div class="backdrop-container" *ngIf="pageBackgroundImg">
+    <img #bgImg [src]="pageBackgroundImg" class="backdrop">
+    <div class="backdrop-fade" [ngStyle]="{background: prepareGradient()}"></div>
+  </div>
+  <div>
+    <p>
+      Main page works!
+    </p>
+  </div>
+
+
+

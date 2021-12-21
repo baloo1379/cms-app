@@ -1,0 +1,25 @@
+.backdrop-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.backdrop {
+  width: 100vw;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: -3;
+}
+
+.backdrop-fade {
+  --backdrop-fade-height: 50vh;
+  position: relative;
+  width: 100vw;
+  height: var(--backdrop-fade-height);
+  top: 0;
+  left: 0;
+  // margin-top: calc(var(--backdrop-fade-height) * -1 - 5px);
+  z-index: -2;
+}
