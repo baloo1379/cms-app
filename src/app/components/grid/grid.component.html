@@ -1,0 +1,9 @@
+<ion-grid fixed="true">
+  <ion-row>
+    <ion-col *ngFor="let el of grid" size="6">
+      <ion-card [routerLink]="[el.link]">
+        <ion-img [src]="el.img"></ion-img>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

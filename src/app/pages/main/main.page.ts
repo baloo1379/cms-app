@@ -12,18 +12,18 @@ export class MainPage {
   pageBackgroundImg = './assets/main-bg.jpg';
   posImg = './assets/grid.jpg';
   grid = [
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'},
-    {img: this.posImg, link: '#'}
+    {img: this.posImg, link: '/post/1'},
+    {img: this.posImg, link: '/post/2'},
+    {img: this.posImg, link: '/post/3'},
+    {img: this.posImg, link: '/post/4'},
+    {img: this.posImg, link: '/post/5'},
+    {img: this.posImg, link: '/post/6'},
+    {img: this.posImg, link: '/post/7'},
+    {img: this.posImg, link: '/post/8'},
+    {img: this.posImg, link: '/post/9'},
+    {img: this.posImg, link: '/post/10'},
+    {img: this.posImg, link: '/post/11'},
+    {img: this.posImg, link: '/post/12'}
   ];
 
   constructor(private menuService: MenuService) {

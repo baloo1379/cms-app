@@ -8,6 +8,9 @@ import { MainPageRoutingModule } from './main-routing.module';
 
 import { MainPage } from './main.page';
 
+import { MpTitleComponent } from './../../components/mp-title/mp-title.component';
+import { GridComponent } from './../../components/grid/grid.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,6 @@ import { MainPage } from './main.page';
     IonicModule,
     MainPageRoutingModule
   ],
-  declarations: [MainPage]
+  declarations: [MainPage, MpTitleComponent, GridComponent]
 })
 export class MainPageModule {}

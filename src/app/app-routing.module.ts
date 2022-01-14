@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'post/:id',
     loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
+  },
+  {
+    path: 'coupon/:id',
+    loadChildren: () => import('./pages/coupon/coupon.module').then( m => m.CouponPageModule)
   }
 ];
 

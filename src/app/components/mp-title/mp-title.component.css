@@ -1,0 +1,11 @@
+.title-box {
+  margin: 0 16px;
+  height: 40vh;
+}
+
+.title-box > h1 {
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  top: 18vh;
+}

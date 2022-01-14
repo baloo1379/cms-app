@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
 
+
+
 @NgModule({
   declarations: [AppComponent, NavComponent],
   entryComponents: [],

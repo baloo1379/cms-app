@@ -3,16 +3,8 @@
     <div class="backdrop-fade" [ngStyle]="{background: prepareGradient()}"></div>
   </div>
   <div>
-    <ion-grid fixed="true">
-      <ion-row>
-        <ion-col *ngFor="let el of grid" size="6">
-          <ion-card>
-            <ion-img [src]="el.img"></ion-img>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
+    <app-mp-title [color]="'white'">Title</app-mp-title>
+    <app-grid [grid]="grid"></app-grid>
   </div>
 
 

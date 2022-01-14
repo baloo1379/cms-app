@@ -8,6 +8,9 @@ import { CouponsPageRoutingModule } from './coupons-routing.module';
 
 import { CouponsPage } from './coupons.page';
 
+import { GridComponent } from './../../components/grid/grid.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,6 @@ import { CouponsPage } from './coupons.page';
     IonicModule,
     CouponsPageRoutingModule
   ],
-  declarations: [CouponsPage]
+  declarations: [CouponsPage, GridComponent]
 })
 export class CouponsPageModule {}
