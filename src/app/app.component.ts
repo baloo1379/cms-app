@@ -1,24 +1,28 @@
-import { MenuService } from 'src/app/services/ui/menu.service';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MenuService } from 'src/app/services/ui/menu.service';
+import { AppService } from 'src/app/services/app.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnDestroy {
-  public appPages = [
-    { title: 'Strona Główna', url: '/home', icon: 'home' },
-    { title: 'Kupony', url: '/coupons', icon: 'ticket' },
-    { title: 'Post', url: '/post/1', icon: 'archive' }
-  ];
+export class AppComponent implements OnDestroy, OnInit {
+  public appPages = [];
   public pageTitle = '';
-  public pageBackgroundColor = '';
+  public pageBackgroundColor = '#ffffff';
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private menuService: MenuService) {
-    this.subscriptions.push(this.menuService.onPageTitleChange().subscribe(value => this.pageTitle = value));
-    this.subscriptions.push(this.menuService.onPageBackgroundColorChange().subscribe(value => this.pageBackgroundColor = value));
+  constructor(private appService: AppService, private menuService: MenuService) { }
+
+  ngOnInit(): void {
+    this.subscriptions.push(this.appService.appPages$.subscribe(pages => this.appPages = pages));
+    this.subscriptions.push(this.menuService.pageTitle$.subscribe(title => {
+      setTimeout(() => { this.pageTitle = title; }, 0);
+    }));
+    this.subscriptions.push(this.menuService.pageBackgroundColor$.subscribe(color => {
+      setTimeout(() => { this.pageBackgroundColor = color; }, 0);
+    }));
   }
 
   ngOnDestroy(): void {

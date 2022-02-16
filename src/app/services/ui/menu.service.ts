@@ -6,24 +6,22 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class MenuService {
+  public pageTitle$: Observable<string>;
+  public pageBackgroundColor$: Observable<string>;
+
   private pageTitleSubject = new Subject<any>();
   private pageBackgroundColorSubject = new Subject<any>();
 
-  constructor() { }
+  constructor() {
+    this.pageTitle$ = this.pageTitleSubject.asObservable();
+    this.pageBackgroundColor$ = this.pageBackgroundColorSubject.asObservable();
+  }
 
   setPageTitle(pageTitle: string): void {
     this.pageTitleSubject.next(pageTitle);
   }
 
-  onPageTitleChange(): Observable<any> {
-    return this.pageTitleSubject.asObservable();
-  }
-
   setPageBackgroundColor(color: string) {
     this.pageBackgroundColorSubject.next(color);
-  }
-
-  onPageBackgroundColorChange(): Observable<any> {
-    return this.pageBackgroundColorSubject.asObservable();
   }
 }

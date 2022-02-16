@@ -1,4 +1,7 @@
+import { CouponsService } from './../../services/pages/coupons.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
 
 @Component({
@@ -7,29 +10,28 @@ import { MenuService } from 'src/app/services/ui/menu.service';
   styleUrls: ['./coupons.page.scss'],
 })
 export class CouponsPage implements OnInit {
-  pageTitle = 'Kupony';
-  posImg = './assets/grid.jpg';
-  grid = [
-    {img: this.posImg, link: '/coupon/1'},
-    {img: this.posImg, link: '/coupon/2'},
-    {img: this.posImg, link: '/coupon/3'},
-    {img: this.posImg, link: '/coupon/4'},
-    {img: this.posImg, link: '/coupon/5'},
-    {img: this.posImg, link: '/coupon/6'},
-    {img: this.posImg, link: '/coupon/7'},
-    {img: this.posImg, link: '/coupon/8'},
-    {img: this.posImg, link: '/coupon/9'},
-    {img: this.posImg, link: '/coupon/10'},
-    {img: this.posImg, link: '/coupon/11'},
-    {img: this.posImg, link: '/coupon/12'}
-  ];
+  public pageTitle = '';
+  public pageBackgroundColor = 'white';
+  public postsGrid = [];
 
-  constructor(private menuService: MenuService) {
-    this.menuService.setPageTitle(this.pageTitle);
-    this.menuService.setPageBackgroundColor('white');
-  }
+  private subscriptions: Array<Subscription> = [];
+
+  constructor(
+    private appService: AppService,
+    private menuService: MenuService,
+    private couponsService: CouponsService
+  ) {}
 
   ngOnInit() {
+    this.subscriptions.push(this.appService.appPages$.subscribe(appPages => {
+      this.pageTitle = appPages?.coupons?.title;
+      this.menuService.setPageTitle(this.pageTitle);
+    }));
+    this.subscriptions.push(this.couponsService.couponsPageModel$.subscribe(couponsPageModel => {
+      this.pageBackgroundColor = couponsPageModel.backgroundColor;
+      this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
+      this.postsGrid = couponsPageModel.postsGrid;
+    }));
   }
 
 }

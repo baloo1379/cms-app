@@ -1,38 +1,52 @@
-import { MenuService } from './../../services/ui/menu.service';
-import { Component } from '@angular/core';
+import { MainPageService } from 'src/app/services/pages/main.service';
+import { AppService } from 'src/app/services/app.service';
+import { MenuService } from 'src/app/services/ui/menu.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
 })
-export class MainPage {
-  pageTitle = 'Strona Główna';
-  pageBackgroundColor = '#eee';
-  pageBackgroundImg = './assets/main-bg.jpg';
-  posImg = './assets/grid.jpg';
-  grid = [
-    {img: this.posImg, link: '/post/1'},
-    {img: this.posImg, link: '/post/2'},
-    {img: this.posImg, link: '/post/3'},
-    {img: this.posImg, link: '/post/4'},
-    {img: this.posImg, link: '/post/5'},
-    {img: this.posImg, link: '/post/6'},
-    {img: this.posImg, link: '/post/7'},
-    {img: this.posImg, link: '/post/8'},
-    {img: this.posImg, link: '/post/9'},
-    {img: this.posImg, link: '/post/10'},
-    {img: this.posImg, link: '/post/11'},
-    {img: this.posImg, link: '/post/12'}
-  ];
+export class MainPage implements OnDestroy, OnInit {
+  public pageTitle = '';
+  public pageBackgroundColor = 'white';
+  public pageBackgroundImg = '';
+  public postsGrid = [];
+  public contentTitle = '';
+  public contentTitleColor = 'black';
 
-  constructor(private menuService: MenuService) {
-    this.menuService.setPageTitle(this.pageTitle);
-    this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
+  private subscriptions: Array<Subscription> = [];
+
+  constructor(
+    private appService: AppService,
+    private menuService: MenuService,
+    private mainPageService: MainPageService
+  ) { }
+
+  ngOnInit(): void {
+    this.subscriptions.push(this.appService.appPages$.subscribe(appPages => {
+      this.pageTitle = appPages?.main?.title;
+      this.menuService.setPageTitle(this.pageTitle);
+    }));
+    this.subscriptions.push(this.mainPageService.mainPageModel$.subscribe(mainPageModel => {
+      this.contentTitle = mainPageModel.contentTitle;
+      this.contentTitleColor = mainPageModel.contentTitleColor;
+      this.pageBackgroundImg = mainPageModel.backgroundImg;
+      this.pageBackgroundColor = mainPageModel.backgroundColor;
+      this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
+      this.postsGrid = mainPageModel.postsGrid;
+    }));
   }
 
   prepareGradient() {
     return `linear-gradient(to bottom, rgba(0,0,0,0), ${this.pageBackgroundColor})`;
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
+  }
 }

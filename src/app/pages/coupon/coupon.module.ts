@@ -1,3 +1,4 @@
+import { CouponCodeComponent } from './../../components/coupon-code/coupon-code.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,6 @@ import { CouponPage } from './coupon.page';
     IonicModule,
     CouponPageRoutingModule
   ],
-  declarations: [CouponPage]
+  declarations: [CouponPage, CouponCodeComponent]
 })
 export class CouponPageModule {}

@@ -3,8 +3,8 @@
     <div class="backdrop-fade" [ngStyle]="{background: prepareGradient()}"></div>
   </div>
   <div>
-    <app-mp-title [color]="'white'">Title</app-mp-title>
-    <app-grid [grid]="grid"></app-grid>
+    <app-mp-title [color]="contentTitleColor">{{ contentTitle }}</app-mp-title>
+    <app-grid [grid]="postsGrid"></app-grid>
   </div>
 
 
