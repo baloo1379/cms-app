@@ -1,13 +1,14 @@
-<p>Coupon page works!</p>
-
-<ion-button (click)="presentModal()">Open coupon</ion-button>
-
-<!-- <ion-modal
-  [isOpen]="isModalOpen"
-  [breakpoints]="[0.1, 0.5, 1]"
-  [initialBreakpoint]="0.5"
->
-  <ng-template>
-    <ion-content>Modal Content</ion-content>
-  </ng-template>
-</ion-modal> -->
+<img src="./assets/tile_placeholder.png" alt="">
+<div class="content">
+  <h1>Tytuł kuponu bardzo długi<br>dwulinijkowy nawet</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae mauris ex. Nulla efficitur at leo a
+    bibendum. Nunc imperdiet ipsum at est imperdiet, id condimentum felis mattis.</p>
+  <p>Quisque at nisl eu nibh convallis aliquet in id sem. Cras dignissim orci ac mollis feugiat. In sed ligula orci. In
+    vel laoreet urna.</p>
+  <p>Ut enim sapien, finibus sodales sodales sed, dignissim a erat. Aenean eu sem mi. Praesent lacinia bibendum arcu,
+    vel luctus ligula imperdiet at.</p>
+  <p>Fusce volutpat finibus nibh, id vulputate ex venenatis id.</p>
+</div>
+<div class="coupon-button-wrapper">
+  <ion-button expand="block" color="secondary" (click)="presentModal()">Open coupon</ion-button>
+</div>
