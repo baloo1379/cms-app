@@ -25,7 +25,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
-    this.userLoggedInSubject.next(true);
+    this.userLoggedInSubject.next(false);
     this.userLoggedInSubject.complete();
     this.userSubject = new AsyncSubject<User|null>();
   }
@@ -52,6 +52,42 @@ export class AuthService {
         return throwError(error?.error?.errors);
       })
     );
+  }
+
+  register(email: string, password: string) {
+    this.userLoggedInSubject = new AsyncSubject<boolean>();
+    this.userSubject = new AsyncSubject<User|null>();
+
+    return this.http.post<any>(
+      '/api/Users/Register',
+      {email, password},
+      HTTP_OPTIONS
+    ).pipe(map(data => {
+      console.log({register: data.status, data});
+      this.userSubject.next(null);
+      this.userSubject.complete();
+      this.userLoggedInSubject.next(false);
+      this.userLoggedInSubject.complete();
+      return data;
+    }), catchError(error => {
+      console.error(error);
+      return throwError(error?.error?.errors);
+    }));
+  }
+
+  logout() {
+    this.userLoggedInSubject = new AsyncSubject<boolean>();
+    this.userSubject = new AsyncSubject<User|null>();
+
+    return this.http.delete<any>('/api/Users/Logout', HTTP_OPTIONS).pipe(map(data => {
+      console.log({logout: data.status});
+      localStorage.removeItem('user');
+      this.userSubject.next(null);
+      this.userSubject.complete();
+      this.userLoggedInSubject.next(false);
+      this.userLoggedInSubject.complete();
+      return data;
+    }));
   }
 
   getUserData(): Observable<HttpResponse<any>>{
