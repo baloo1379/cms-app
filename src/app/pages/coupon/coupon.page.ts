@@ -30,33 +30,15 @@ export class CouponPage implements OnInit {
     this.menuService.setPageBackgroundColor('white');
   }
 
-  async openBottomSheet(ev: any) {
-    const popover = await this.popoverController.create({
-      component: CouponCodeComponent,
-      componentProps: {code: `${this.couponId}`},
-      translucent: true,
-    });
-    await popover.present();
-
-    const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
-
   async presentModal() {
     const modal = await this.modalController.create({
       component: CouponCodeComponent,
-      componentProps: {code: `${this.couponId}`},
+      componentProps: {code: `M125987 ${this.couponId}`},
       cssClass: 'my-custom-class',
       initialBreakpoint: 0.5,
       breakpoints: [0, 0.5]
     });
-    // const { role } = await modal.onDidDismiss();
-    // console.log('onDidDismiss resolved with role', role);
-    return await modal.present();
-  }
 
-  async openBottomModal() {
-    if (this.isModalOpen) { this.isModalOpen = false; }
-    else { this.isModalOpen = true; }
+    return await modal.present();
   }
 }

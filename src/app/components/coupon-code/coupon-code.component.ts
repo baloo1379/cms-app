@@ -6,18 +6,19 @@ const jsBarcode = require('jsbarcode');
   templateUrl: './coupon-code.component.html',
   styleUrls: ['./coupon-code.component.scss'],
 })
-export class CouponCodeComponent implements OnInit, AfterViewInit {
+export class CouponCodeComponent implements AfterViewInit {
   @Input() code: string;
-  @ViewChild('barcode') barcodeEl: ElementRef<HTMLImageElement>;
+  @ViewChild('barcode') barcodeEl: ElementRef<HTMLOrSVGElement>;
+  private barcodeOptions = {
+    fontSize: 40,
+    height: 150,
+    width: 2.5
+  };
 
   constructor() { }
-  ngAfterViewInit(): void {
-    console.log(this.barcodeEl);
-    jsBarcode(this.barcodeEl.nativeElement, 'M957340');
-  }
 
-  ngOnInit() {
-    // jsBarcode(this.barcodeEl, 'Hi!');
+  ngAfterViewInit(): void {
+    jsBarcode(this.barcodeEl.nativeElement, this.code, this.barcodeOptions);
   }
 
 }
