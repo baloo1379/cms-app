@@ -1,7 +1,7 @@
 import { MainPageService } from 'src/app/services/pages/main.service';
 import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,6 +24,8 @@ export class MainPage implements OnDestroy, OnInit {
     private menuService: MenuService,
     private mainPageService: MainPageService
   ) { }
+
+
 
   ngOnInit(): void {
     this.subscriptions.push(this.appService.appPages$.subscribe(appPages => {

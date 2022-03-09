@@ -1,5 +1,5 @@
 import { CouponsService } from './../../services/pages/coupons.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';

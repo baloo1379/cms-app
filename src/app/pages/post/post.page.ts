@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuService } from 'src/app/services/ui/menu.service';
 import { Router, ActivatedRoute } from '@angular/router';
 

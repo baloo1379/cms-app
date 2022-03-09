@@ -14,7 +14,8 @@ export class AppService {
     const appPages = {
       main: { title: 'Strona Główna', url: '/home', icon: 'home' },
       coupons: { title: 'Kupony', url: '/coupons', icon: 'ticket' },
-      post: { title: 'Post', url: '/post/1', icon: 'archive' }
+      post: { title: 'Post', url: '/post/1', icon: 'archive' },
+      account: { title: 'Moje konto', url: '/account', icon: 'person' }
     };
     this.appPagesBS.next(appPages);
   }

@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Subscription, Observable, of } from 'rxjs';
 import { MenuService } from 'src/app/services/ui/menu.service';
 import { AppService } from 'src/app/services/app.service';
 @Component({
@@ -9,11 +9,14 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public appPages = [];
-  public pageTitle = '';
+  public pageTitle;
   public pageBackgroundColor = '#ffffff';
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private appService: AppService, private menuService: MenuService) { }
+  constructor(
+    private appService: AppService,
+    private menuService: MenuService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(this.appService.appPages$.subscribe(pages => this.appPages = pages));
