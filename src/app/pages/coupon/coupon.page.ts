@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from 'src/app/services/ui/menu.service';
@@ -19,9 +20,9 @@ export class CouponPage implements OnInit {
     private menuService: MenuService,
     private route: ActivatedRoute,
     private router: Router,
-    public popoverController: PopoverController,
+    public authService: AuthService,
     public modalController: ModalController
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.couponId = Number(this.route.snapshot.paramMap.get('id'));
@@ -40,5 +41,9 @@ export class CouponPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 }

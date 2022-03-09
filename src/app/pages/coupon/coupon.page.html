@@ -10,5 +10,6 @@
   <p>Fusce volutpat finibus nibh, id vulputate ex venenatis id.</p>
 </div>
 <div class="ion-margin">
-  <ion-button expand="block" color="primary" (click)="presentModal()">Open coupon</ion-button>
+  <ion-button *ngIf="this.authService.isUserLoggedIn() | async" expand="block" color="primary" (click)="presentModal()">Pokaż kupon</ion-button>
+  <ion-button *ngIf="(this.authService.isUserLoggedIn() | async) === false" expand="block" color="primary" (click)="redirectToLogin()">Zaloguj</ion-button>
 </div>

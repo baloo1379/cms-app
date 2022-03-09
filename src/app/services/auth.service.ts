@@ -20,25 +20,19 @@ const HTTP_OPTIONS = {
   providedIn: 'root'
 })
 export class AuthService {
-  public userObservable: Observable<User|null>;
   private userSubject: AsyncSubject<User|null>;
   private userLoggedInSubject: AsyncSubject<boolean>;
-  private userLoggedInObservable: Observable<boolean>;
 
   constructor(private http: HttpClient) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
-    this.userLoggedInSubject.next(false);
+    this.userLoggedInSubject.next(true);
     this.userLoggedInSubject.complete();
     this.userSubject = new AsyncSubject<User|null>();
-    this.userObservable = this.userSubject.asObservable();
-    this.userLoggedInObservable = this.userLoggedInSubject.asObservable();
   }
 
   login(email: string, password: string) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
     this.userSubject = new AsyncSubject<User|null>();
-    this.userObservable = this.userSubject.asObservable();
-    this.userLoggedInObservable = this.userLoggedInSubject.asObservable();
     return this.http.post<any>(
       `/api/Users/Login`,
       {email, password},
@@ -84,6 +78,6 @@ export class AuthService {
   }
 
   public isUserLoggedIn(): Observable<boolean> {
-    return this.userLoggedInObservable;
+    return this.userLoggedInSubject.asObservable();
   }
 }
