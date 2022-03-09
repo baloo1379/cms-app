@@ -27,6 +27,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
+    this.userLoggedInSubject.next(false);
+    this.userLoggedInSubject.complete();
     this.userSubject = new AsyncSubject<User|null>();
     this.userObservable = this.userSubject.asObservable();
     this.userLoggedInObservable = this.userLoggedInSubject.asObservable();
@@ -79,5 +81,9 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(tempUser));
     this.userSubject.next(tempUser);
     this.userSubject.complete();
+  }
+
+  public isUserLoggedIn(): Observable<boolean> {
+    return this.userLoggedInObservable;
   }
 }
