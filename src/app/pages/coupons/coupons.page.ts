@@ -1,5 +1,5 @@
 import { CouponsService } from './../../services/pages/coupons.service';
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
@@ -23,14 +23,13 @@ export class CouponsPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
     this.subscriptions.push(this.appService.getAppPage().subscribe(appPages => {
       this.pageTitle = appPages?.coupons?.title;
       this.menuService.setPageTitle(this.pageTitle);
     }));
-    this.subscriptions.push(this.couponsService.couponsPageModel$.subscribe(couponsPageModel => {
-      this.pageBackgroundColor = couponsPageModel.backgroundColor;
-      this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
-      this.postsGrid = couponsPageModel.postsGrid;
+    this.subscriptions.push(this.couponsService.getCouponsPage().subscribe(couponsPage => {
+      console.log('couponsPage', couponsPage);
     }));
   }
 
