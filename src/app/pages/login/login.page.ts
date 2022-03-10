@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/ui/menu.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { MenuService } from 'src/app/services/ui/menu.service';
 export class LoginPage implements OnInit {
 
   constructor(
-    private menuService: MenuService
+    private menuService: MenuService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -19,6 +21,10 @@ export class LoginPage implements OnInit {
 
   login(form) {
     console.log(form);
+  }
+
+  redirectToRegister() {
+    this.router.navigate(['/register']);
   }
 
 }
