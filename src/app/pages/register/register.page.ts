@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { MenuService } from 'src/app/services/ui/menu.service';
 export class RegisterPage implements OnInit {
 
   constructor(
-    private menuService: MenuService
+    private menuService: MenuService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -18,7 +20,9 @@ export class RegisterPage implements OnInit {
   }
 
   register(form) {
-    console.log(form);
+    this.authService.register(form.form.value.email, form.form.value.password).subscribe(result => {
+      console.log(result);
+    });
   }
 
 }

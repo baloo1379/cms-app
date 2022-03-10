@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuService } from 'src/app/services/ui/menu.service';
@@ -12,6 +13,7 @@ export class LoginPage implements OnInit {
   constructor(
     private menuService: MenuService,
     private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -20,7 +22,9 @@ export class LoginPage implements OnInit {
   }
 
   login(form) {
-    console.log(form);
+    this.authService.login(form.form.value.email, form.form.value.password).subscribe(result => {
+      console.log(result);
+    });
   }
 
   redirectToRegister() {

@@ -63,7 +63,7 @@ export class AuthService {
       {email, password},
       HTTP_OPTIONS
     ).pipe(map(data => {
-      console.log({register: data.status, data});
+      console.log({register: data.status});
       this.userSubject.next(null);
       this.userSubject.complete();
       this.userLoggedInSubject.next(false);
