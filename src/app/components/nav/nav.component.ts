@@ -7,7 +7,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
-  @Input() appPages: object = {};
+  @Input() appPages: Array<any> = [];
   keys = Object.keys;
 
   constructor(private menu: MenuController) {}

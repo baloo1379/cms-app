@@ -1,11 +1,11 @@
 <ion-menu #mainMenu contentId="main-menu" menuId="main-menu" type="overlay">
   <ion-content>
     <ion-list id="inbox-list">
-      <ion-menu-toggle auto-hide="false" *ngFor="let p of keys(appPages)">
-        <ion-item routerDirection="root" [routerLink]="[appPages[p].url]" lines="none" detail="false"
+      <ion-menu-toggle auto-hide="false" *ngFor="let page of appPages">
+        <ion-item routerDirection="root" [routerLink]="[page.url]" lines="none" detail="false"
           routerLinkActive="selected">
-          <ion-icon slot="start" [ios]="appPages[p].icon + '-outline'" [md]="appPages[p].icon + '-sharp'"></ion-icon>
-          <ion-label>{{ appPages[p].title }}</ion-label>
+          <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
+          <ion-label>{{ page.title }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
     </ion-list>

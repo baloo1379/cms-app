@@ -23,7 +23,7 @@ export class CouponsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.subscriptions.push(this.appService.appPages$.subscribe(appPages => {
+    this.subscriptions.push(this.appService.getAppPage().subscribe(appPages => {
       this.pageTitle = appPages?.coupons?.title;
       this.menuService.setPageTitle(this.pageTitle);
     }));

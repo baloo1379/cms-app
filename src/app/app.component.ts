@@ -19,7 +19,7 @@ export class AppComponent implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.appService.appPages$.subscribe(pages => this.appPages = pages));
+    this.subscriptions.push(this.appService.getAppPage().subscribe(pages => this.appPages = pages));
     this.subscriptions.push(this.menuService.pageTitle$.subscribe(title => {
       setTimeout(() => { this.pageTitle = title; }, 0);
     }));

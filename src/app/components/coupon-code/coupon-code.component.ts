@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-const jsBarcode = require('jsbarcode');
+import * as jsBarcode from 'jsbarcode';
 
 @Component({
   selector: 'app-coupon-code',

@@ -1,15 +1,18 @@
+import { ActivePost } from './activePost.model';
+import { MenuPost } from './menuPost.model';
+
 export class MainPageModel {
   contentTitle: string;
-  contentTitleColor: string;
-  backgroundImg: string;
+  backgroundImage: string;
   backgroundColor: string;
-  postsGrid: Array<any>;
+  activePosts: Array<ActivePost>;
+  menuPosts: Array<MenuPost>;
 
   constructor(object: any) {
     this.contentTitle = object?.contentTitle || '';
-    this.contentTitleColor = object?.contentTitleColor || '#444';
-    this.backgroundImg = object?.backgroundImg || './assets/background_placeholder.png';
+    this.backgroundImage = object?.backgroundImage || './assets/background_placeholder.png';
     this.backgroundColor = object?.backgroundColor || '#ddd';
-    this.postsGrid = object?.postsGrid || [];
+    this.activePosts = object?.activePosts || [];
+    this.menuPosts = object?.menuPosts || [];
   }
 };

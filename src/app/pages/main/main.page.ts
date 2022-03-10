@@ -1,7 +1,7 @@
 import { MainPageService } from 'src/app/services/pages/main.service';
 import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +15,6 @@ export class MainPage implements OnDestroy, OnInit {
   public pageBackgroundImg = '';
   public postsGrid = [];
   public contentTitle = '';
-  public contentTitleColor = 'black';
 
   private subscriptions: Array<Subscription> = [];
 
@@ -25,20 +24,17 @@ export class MainPage implements OnDestroy, OnInit {
     private mainPageService: MainPageService
   ) { }
 
-
-
   ngOnInit(): void {
-    this.subscriptions.push(this.appService.appPages$.subscribe(appPages => {
+    this.subscriptions.push(this.appService.getAppPage().subscribe(appPages => {
       this.pageTitle = appPages?.main?.title;
       this.menuService.setPageTitle(this.pageTitle);
     }));
-    this.subscriptions.push(this.mainPageService.mainPageModel$.subscribe(mainPageModel => {
-      this.contentTitle = mainPageModel.contentTitle;
-      this.contentTitleColor = mainPageModel.contentTitleColor;
-      this.pageBackgroundImg = mainPageModel.backgroundImg;
-      this.pageBackgroundColor = mainPageModel.backgroundColor;
+    this.subscriptions.push(this.mainPageService.getMainPage().subscribe(mainPage => {
+      this.contentTitle = mainPage.contentTitle;
+      this.pageBackgroundImg = mainPage.backgroundImage;
+      this.pageBackgroundColor = mainPage.backgroundColor;
       this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
-      this.postsGrid = mainPageModel.postsGrid;
+      this.postsGrid = mainPage.activePosts;
     }));
   }
 
