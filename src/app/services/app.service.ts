@@ -17,7 +17,7 @@ export class AppService {
       { title: 'Kupony', url: '/coupons', icon: 'ticket' },
       { title: 'Moje konto', url: '/account', icon: 'person' }
     ];
-    this.initMainPage().subscribe(mainPage => {
+    mainPageService.initMainPage().subscribe(mainPage => {
       const menuPages = mainPage.menuPosts.map(menuPost => ({title: menuPost.title, icon: menuPost.icon, url: `/post/${menuPost.postID}`}));
       appPages = appPages.concat(menuPages);
       this.appPagesBS.next(appPages);
@@ -27,13 +27,5 @@ export class AppService {
 
   public getAppPage(): Observable<any> {
     return this.appPagesBS.asObservable();
-  }
-
-  private initMainPage() {
-    return this.http.get<MainPageModel>('/main').pipe(map(result => {
-      const mainPageModel = new MainPageModel(result);
-      this.mainPageService.setMainPage(mainPageModel);
-      return mainPageModel;
-    }));
   }
 }

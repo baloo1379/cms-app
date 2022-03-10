@@ -2,11 +2,11 @@ import { CouponPreview } from './couponPreview.model';
 import { CouponTags } from './couponTags.model';
 
 export class CouponsPageModel {
-  coupons: CouponPreview[];
-  tags: CouponTags[];
+  couponsWithTags: CouponPreview[];
+  allTags: CouponTags[];
 
   constructor(object: any) {
-    this.coupons = object?.backgroundColor || [];
-    this.tags = object?.tags || [];
+    this.couponsWithTags = object?.couponsWithTags || [];
+    this.allTags = object?.allTags || [];
   }
 };

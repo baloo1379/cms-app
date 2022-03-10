@@ -10,9 +10,8 @@ export class CouponsService {
   private couponsPageModelSub = new AsyncSubject<CouponsPageModel>();
 
   constructor(private http: HttpClient) {
-    this.http.get<CouponsPageModel[]>('/coupons').subscribe(result => {
-      // const couponsPage = new CouponsPageModel(result);
-      console.log('service', result);
+    this.http.get<CouponsPageModel>('/coupons-page').subscribe(couponsPage => {
+      this.setCouponsPage(couponsPage);
     });
   }
 

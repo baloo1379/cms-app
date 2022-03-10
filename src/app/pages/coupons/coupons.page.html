@@ -1,3 +1,8 @@
 <div>
+  <div class="ion-margin">
+    <ion-chip [color]="tag?.enabled ? 'primary':'medium'" *ngFor="let tag of tags" (click)="filterByTag(tag.id)">
+      <ion-label>{{ tag.name }}</ion-label>
+    </ion-chip>
+  </div>
   <app-grid [grid]="postsGrid"></app-grid>
 </div>

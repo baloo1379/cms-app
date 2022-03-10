@@ -1,3 +1,4 @@
+import { GridModel } from './../../models/grid.model';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./grid.component.css']
 })
 export class GridComponent {
-  @Input() grid: any;
+  @Input() grid: GridModel[];
 
   constructor() { }
 }
