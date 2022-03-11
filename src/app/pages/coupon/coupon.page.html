@@ -1,14 +1,5 @@
-<img src="./assets/placeholder.png" alt="">
-<div class="content ion-margin">
-  <h1>Tytuł kuponu bardzo długi<br>dwulinijkowy nawet</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae mauris ex. Nulla efficitur at leo a
-    bibendum. Nunc imperdiet ipsum at est imperdiet, id condimentum felis mattis.</p>
-  <p>Quisque at nisl eu nibh convallis aliquet in id sem. Cras dignissim orci ac mollis feugiat. In sed ligula orci. In
-    vel laoreet urna.</p>
-  <p>Ut enim sapien, finibus sodales sodales sed, dignissim a erat. Aenean eu sem mi. Praesent lacinia bibendum arcu,
-    vel luctus ligula imperdiet at.</p>
-  <p>Fusce volutpat finibus nibh, id vulputate ex venenatis id.</p>
-</div>
+<img [src]="image" onerror="this.onerror=null;this.src='./assets/placeholder.png'" alt="">
+<div class="content ion-margin" [innerHTML]="content"></div>
 <div class="ion-margin">
   <ion-button *ngIf="this.authService.isUserLoggedIn() | async" expand="block" color="primary" (click)="presentModal()">Pokaż kupon</ion-button>
   <ion-button *ngIf="(this.authService.isUserLoggedIn() | async) === false" expand="block" color="primary" (click)="redirectToLogin()">Zaloguj</ion-button>

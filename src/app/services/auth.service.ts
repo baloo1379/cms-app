@@ -25,7 +25,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
-    this.userLoggedInSubject.next(false);
+    this.userLoggedInSubject.next(true);
     this.userLoggedInSubject.complete();
     this.userSubject = new AsyncSubject<User|null>();
   }

@@ -4,7 +4,7 @@ export class CouponPreview {
   tags: Array<any>;
 
   constructor(object: any) {
-    this.id = object?.backgroundColor || 0;
+    this.id = object?.id || 0;
     this.image = object?.image || '';
     this.tags = object?.tags || [];
   }

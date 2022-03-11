@@ -1,3 +1,4 @@
+import { CouponService } from './../../services/pages/coupon.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,8 +12,8 @@ import { CouponCodeComponent } from 'src/app/components/coupon-code/coupon-code.
   styleUrls: ['./coupon.page.scss'],
 })
 export class CouponPage implements OnInit {
-  public isModalOpen = false;
-
+  public content: string;
+  public image: string;
   private couponId: number;
   private couponTitle: string;
 
@@ -20,27 +21,35 @@ export class CouponPage implements OnInit {
     private menuService: MenuService,
     private route: ActivatedRoute,
     private router: Router,
+    private couponService: CouponService,
     public authService: AuthService,
     public modalController: ModalController
   ) { }
 
   ngOnInit(): void {
     this.couponId = Number(this.route.snapshot.paramMap.get('id'));
-    this.couponTitle = `Kupon ${this.couponId}`;
-    this.menuService.setPageTitle(this.couponTitle);
-    this.menuService.setPageBackgroundColor('white');
+    this.couponService.getCoupon(this.couponId).subscribe(coupon => {
+      this.couponTitle = coupon.name;
+      this.content = coupon.description;
+      this.image = coupon.image;
+      this.menuService.setPageTitle(this.couponTitle);
+      this.menuService.setPageBackgroundColor('white');
+    });
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: CouponCodeComponent,
-      componentProps: {code: `M125987 ${this.couponId}`},
-      cssClass: 'my-custom-class',
-      initialBreakpoint: 0.5,
-      breakpoints: [0, 0.5]
+  presentModal() {
+    this.couponService.getCode(this.couponId).subscribe(async code => {
+      const modal = await this.modalController.create({
+        component: CouponCodeComponent,
+        componentProps: {code: `${code.code}`},
+        cssClass: 'my-custom-class',
+        initialBreakpoint: 0.5,
+        breakpoints: [0, 0.5]
+      });
+      return await modal.present();
+    }, () => {
+      this.redirectToLogin();
     });
-
-    return await modal.present();
   }
 
   redirectToLogin() {
