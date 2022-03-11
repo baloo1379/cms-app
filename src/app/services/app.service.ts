@@ -11,13 +11,13 @@ import { map } from 'rxjs/operators';
 export class AppService {
   private appPagesBS = new AsyncSubject<any>();
 
-  constructor(private http: HttpClient, private mainPageService: MainPageService) {
+  constructor(private mainPageService: MainPageService) {
     let appPages = [
       { title: 'Strona Główna', url: '/home', icon: 'home' },
       { title: 'Kupony', url: '/coupons', icon: 'ticket' },
       { title: 'Moje konto', url: '/account', icon: 'person' }
     ];
-    mainPageService.initMainPage().subscribe(mainPage => {
+    this.mainPageService.initMainPage().subscribe(mainPage => {
       const menuPages = mainPage.menuPosts.map(menuPost => ({title: menuPost.title, icon: menuPost.icon, url: `/post/${menuPost.postID}`}));
       appPages = appPages.concat(menuPages);
       this.appPagesBS.next(appPages);

@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnDestroy, OnInit {
-  public pageTitle = '';
+  public pageTitle = 'Strona główna';
   public pageBackgroundColor = 'white';
   public pageBackgroundImg = '';
   public postsGrid = [];
@@ -19,22 +19,19 @@ export class MainPage implements OnDestroy, OnInit {
   private subscriptions: Array<Subscription> = [];
 
   constructor(
-    private appService: AppService,
     private menuService: MenuService,
     private mainPageService: MainPageService
   ) { }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.appService.getAppPage().subscribe(appPages => {
-      this.pageTitle = appPages?.main?.title;
-      this.menuService.setPageTitle(this.pageTitle);
-    }));
     this.subscriptions.push(this.mainPageService.getMainPage().subscribe(mainPage => {
       this.contentTitle = mainPage.contentTitle;
       this.pageBackgroundImg = mainPage.backgroundImage;
       this.pageBackgroundColor = mainPage.backgroundColor;
-      this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
       this.postsGrid = mainPage.activePosts;
+
+      this.menuService.setPageTitle(this.pageTitle);
+      this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
     }));
   }
 

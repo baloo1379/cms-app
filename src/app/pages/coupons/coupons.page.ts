@@ -13,7 +13,7 @@ import { MenuService } from 'src/app/services/ui/menu.service';
   styleUrls: ['./coupons.page.scss'],
 })
 export class CouponsPage implements OnInit {
-  public pageTitle = '';
+  public pageTitle = 'Kupony';
   public pageBackgroundColor = 'white';
   public postsGrid: GridModel[] = [];
   public coupons: CouponPreview[] = [];
@@ -24,17 +24,13 @@ export class CouponsPage implements OnInit {
 
 
   constructor(
-    private appService: AppService,
     private menuService: MenuService,
     private couponsService: CouponsService
   ) {}
 
   ngOnInit() {
     this.menuService.setPageBackgroundColor(this.pageBackgroundColor);
-    this.subscriptions.push(this.appService.getAppPage().subscribe(appPages => {
-      this.pageTitle = appPages?.coupons?.title;
-      this.menuService.setPageTitle(this.pageTitle);
-    }));
+    this.menuService.setPageTitle(this.pageTitle);
     this.subscriptions.push(this.couponsService.getCouponsPage().subscribe(couponsPage => {
       this.coupons = couponsPage.couponsWithTags;
       this.prepareCouponsGrid(this.coupons);
