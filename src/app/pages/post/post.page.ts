@@ -29,6 +29,8 @@ export class PostPage implements OnInit, OnDestroy {
       this.content = post.content;
       this.menuService.setPageTitle(this.title);
       this.menuService.setPageBackgroundColor('white');
+    }, err => {
+      console.error({post: err});
     }));
   }
 

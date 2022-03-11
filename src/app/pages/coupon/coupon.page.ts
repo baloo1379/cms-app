@@ -37,6 +37,8 @@ export class CouponPage implements OnInit, OnDestroy {
       this.image = coupon.image;
       this.menuService.setPageTitle(this.couponTitle);
       this.menuService.setPageBackgroundColor('white');
+    }, err => {
+      console.error({coupon: err});
     }));
   }
 
@@ -50,8 +52,8 @@ export class CouponPage implements OnInit, OnDestroy {
         breakpoints: [0, 0.5]
       });
       return await modal.present();
-    }, () => {
-      this.redirectToLogin();
+    }, err => {
+      console.error({coupon: err});
     });
   }
 
