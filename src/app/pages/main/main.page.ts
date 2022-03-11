@@ -1,5 +1,4 @@
 import { MainPageService } from 'src/app/services/pages/main.service';
-import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';

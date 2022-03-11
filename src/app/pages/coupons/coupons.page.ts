@@ -1,10 +1,8 @@
-import { CouponTags } from './../../models/coupons/couponTags.model';
-import { CouponPreview } from './../../models/coupons/couponPreview.model';
-import { GridModel } from './../../models/grid.model';
-import { CouponsService } from './../../services/pages/coupons.service';
-import { Component, OnInit } from '@angular/core';
+import { CouponPreview } from 'src/app/models/coupons/couponPreview.model';
+import { GridModel } from 'src/app/models/grid.model';
+import { CouponsService } from 'src/app/services/pages/coupons.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppService } from 'src/app/services/app.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
 
 @Component({
@@ -12,7 +10,7 @@ import { MenuService } from 'src/app/services/ui/menu.service';
   templateUrl: './coupons.page.html',
   styleUrls: ['./coupons.page.scss'],
 })
-export class CouponsPage implements OnInit {
+export class CouponsPage implements OnInit, OnDestroy {
   public pageTitle = 'Kupony';
   public pageBackgroundColor = 'white';
   public postsGrid: GridModel[] = [];
@@ -61,6 +59,12 @@ export class CouponsPage implements OnInit {
 
   prepareCouponsGrid(coupons: Array<any>) {
     this.postsGrid = coupons.map(coupon => new GridModel({image: coupon.image, link: `/coupon/${coupon.id}`}));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
   }
 
 }

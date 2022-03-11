@@ -1,18 +1,20 @@
-import { PostService } from './../../services/pages/post.service';
+import { PostService } from 'src/app/services/pages/post.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuService } from 'src/app/services/ui/menu.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss'],
 })
-export class PostPage implements OnInit {
+export class PostPage implements OnInit, OnDestroy {
   public title: string;
   public content: string;
   private postId: number;
-  private pageTitle: string;
+
+  private subscriptions: Array<Subscription> = [];
 
   constructor(
     private menuService: MenuService,
@@ -22,12 +24,17 @@ export class PostPage implements OnInit {
 
   ngOnInit(): void {
     this.postId = Number(this.route.snapshot.paramMap.get('id'));
-    this.postService.getPost(this.postId).subscribe(post => {
-      this.pageTitle = post.title;
+    this.subscriptions.push(this.postService.getPost(this.postId).subscribe(post => {
       this.title = post.title;
       this.content = post.content;
-      this.menuService.setPageTitle(this.pageTitle);
+      this.menuService.setPageTitle(this.title);
       this.menuService.setPageBackgroundColor('white');
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
     });
   }
 }
