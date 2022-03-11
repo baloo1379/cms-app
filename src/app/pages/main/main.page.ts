@@ -1,3 +1,4 @@
+import { GridModel } from './../../models/grid.model';
 import { MainPageService } from 'src/app/services/pages/main.service';
 import { MenuService } from 'src/app/services/ui/menu.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class MainPage implements OnDestroy, OnInit {
   public pageTitle = 'Strona główna';
   public pageBackgroundColor = 'white';
   public pageBackgroundImg = '';
-  public postsGrid = [];
+  public postsGrid: GridModel[] = [];
   public contentTitle = '';
 
   private subscriptions: Array<Subscription> = [];
@@ -27,7 +28,7 @@ export class MainPage implements OnDestroy, OnInit {
       this.contentTitle = mainPage.contentTitle;
       this.pageBackgroundImg = mainPage.backgroundImage;
       this.pageBackgroundColor = mainPage.backgroundColor;
-      this.postsGrid = mainPage.activePosts;
+      this.postsGrid = mainPage.activePosts.map(post => new GridModel({image: post.image, link: `/post/${post.postID}`}));
 
       this.menuService.setPageTitle(this.pageTitle);
       this.menuService.setPageBackgroundColor(this.pageBackgroundColor);

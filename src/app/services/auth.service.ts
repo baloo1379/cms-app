@@ -11,9 +11,12 @@ const HTTP_OPTIONS = {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     'Content-Type': 'application/json',
     // eslint-disable-next-line @typescript-eslint/naming-convention, quote-props
-    'Accept': '*/*'
+    'Accept': '*/*',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'Access-Control-Allow-Origin': '*'
   }),
   observe: 'response' as const
+  // withCredentials: true,
 };
 
 @Injectable({
@@ -25,17 +28,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
-    this.userLoggedInSubject.next(true);
+    this.userLoggedInSubject.next(false);
     this.userLoggedInSubject.complete();
     this.userSubject = new AsyncSubject<User|null>();
   }
 
-  login(email: string, password: string) {
+  login(userName: string, password: string) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
     this.userSubject = new AsyncSubject<User|null>();
     return this.http.post<any>(
-      `/api/Users/Login`,
-      {email, password},
+      `/api/users/login`,
+      {userName, password},
       HTTP_OPTIONS
     ).pipe(
       map(data => {
@@ -54,13 +57,13 @@ export class AuthService {
     );
   }
 
-  register(email: string, password: string) {
+  register(email: string, userName: string, password: string) {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
     this.userSubject = new AsyncSubject<User|null>();
 
     return this.http.post<any>(
-      '/api/Users/Register',
-      {email, password},
+      '/api/users/register',
+      {email, userName, password},
       HTTP_OPTIONS
     ).pipe(map(data => {
       console.log({register: data.status});
@@ -79,7 +82,7 @@ export class AuthService {
     this.userLoggedInSubject = new AsyncSubject<boolean>();
     this.userSubject = new AsyncSubject<User|null>();
 
-    return this.http.delete<any>('/api/Users/Logout', HTTP_OPTIONS).pipe(map(data => {
+    return this.http.delete<any>('/api/users/logout', HTTP_OPTIONS).pipe(map(data => {
       console.log({logout: data.status});
       localStorage.removeItem('user');
       this.userSubject.next(null);
@@ -91,7 +94,7 @@ export class AuthService {
   }
 
   getUserData(): Observable<HttpResponse<any>>{
-    return this.http.get<any>(`/api/Users/Logged`, HTTP_OPTIONS).pipe(map(data => {
+    return this.http.get<any>(`/api/users/logged`, HTTP_OPTIONS).pipe(map(data => {
       console.log({getUserData: data.status});
       if(data.status === 200){
         this.userLoggedInSubject.next(true);

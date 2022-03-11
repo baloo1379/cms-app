@@ -13,7 +13,7 @@ export class PostService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getPost(id: number) {
-    return this.http.get<PostModel>(`/posts/${id}`).pipe(map(result => {
+    return this.http.get<PostModel>(`/api/posts/${id}`).pipe(map(result => {
       result.id = id;
       return result;
     }), catchError(error => {

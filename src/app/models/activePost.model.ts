@@ -1,9 +1,9 @@
 export class ActivePost {
   postID: number;
-  imageID: number;
+  image: number;
 
   constructor(object: any) {
     this.postID = object?.postID || 0;
-    this.imageID = object?.imageID || '';
+    this.image = object?.image || '';
   }
 };

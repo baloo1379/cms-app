@@ -22,7 +22,7 @@ export class MainPageService {
   }
 
   public initMainPage() {
-    return this.http.get<MainPageModel>('/main-page').pipe(map(result => {
+    return this.http.get<MainPageModel>('/api/main-page').pipe(map(result => {
       const mainPageModel = new MainPageModel(result);
       this.setMainPage(mainPageModel);
       return mainPageModel;

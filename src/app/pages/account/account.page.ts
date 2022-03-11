@@ -24,7 +24,7 @@ export class AccountPage implements OnInit {
   logoutUser() {
     this.authService.logout().subscribe(
       () => {
-        this.router.navigate(['/auth']);
+        this.router.navigate(['/home']);
       },
       err => {
         alert('Nie wylogowano');

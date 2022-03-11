@@ -14,8 +14,7 @@ export class CouponService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getCoupon(id: number) {
-    return this.http.get<CouponDetail>(`/${id}`).pipe(map(result => {
-      console.log({result});
+    return this.http.get<CouponDetail>(`/api/${id}`).pipe(map(result => {
       result.id = id;
       return result;
     }), catchError(error => {
@@ -25,7 +24,7 @@ export class CouponService {
   }
 
   getCode(id: number) {
-    return this.http.get<CouponCode>(`/coupon-code/${id}`).pipe(map(result => {
+    return this.http.get<CouponCode>(`/api/coupon-code/${id}`).pipe(map(result => {
       console.log({result});
       result.id = id;
       return result;
