@@ -60,7 +60,7 @@ export class CouponsPage implements OnInit {
   }
 
   prepareCouponsGrid(coupons: Array<any>) {
-    this.postsGrid = coupons.map(coupon => new GridModel({image: coupon.image, link: `/post/${coupon.id}`}));
+    this.postsGrid = coupons.map(coupon => new GridModel({image: coupon.image, link: `/coupon/${coupon.id}`}));
   }
 
 }
