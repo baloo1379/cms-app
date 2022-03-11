@@ -35,7 +35,12 @@ const routes: Routes = [
     path: 'register',
     canActivate: [LoggedOutGuard],
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: '404',
+    loadChildren: () => import('./pages/errors/e404/e404.module').then( m => m.E404PageModule)
   }
+
 
 ];
 
