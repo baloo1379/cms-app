@@ -1,5 +1,5 @@
   <div class="backdrop-container" *ngIf="pageBackgroundImg">
-    <img #bgImg [src]="pageBackgroundImg" class="backdrop">
+    <img #bgImg [src]="pageBackgroundImg" onerror="this.onerror=null;this.src='./assets/background_placeholder.png'" class="backdrop">
     <div class="backdrop-fade" [ngStyle]="{background: prepareGradient()}"></div>
   </div>
   <div>

@@ -2,7 +2,7 @@
   <ion-row>
     <ion-col *ngFor="let el of grid" size="6">
       <ion-card [routerLink]="[el.link]" >{{el.img}}
-        <ion-img [src]="el.image"></ion-img>
+        <ion-img [src]="el.image" onerror="this.onerror=null;this.src='./assets/tile_placeholder.png'"></ion-img>
       </ion-card>
     </ion-col>
   </ion-row>
