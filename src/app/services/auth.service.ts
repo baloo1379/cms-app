@@ -119,4 +119,8 @@ export class AuthService {
   public isUserLoggedIn(): Observable<boolean> {
     return this.userLoggedInSubject.asObservable();
   }
+
+  public getUser(): Observable<User> {
+    return this.userSubject.asObservable();
+  }
 }

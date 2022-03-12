@@ -9,6 +9,7 @@ import { MenuService } from 'src/app/services/ui/menu.service';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
+  public userName: string;
 
   constructor(
     private router: Router,
@@ -19,6 +20,9 @@ export class AccountPage implements OnInit {
   ngOnInit() {
     this.menuService.setPageTitle('Konto');
     this.menuService.setPageBackgroundColor('white');
+    this.authService.getUser().subscribe(user => {
+      this.userName = user.userName;
+    });
   }
 
   logoutUser() {
